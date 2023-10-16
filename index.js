@@ -1,17 +1,19 @@
-const WebSocket = require('websocket');
-const PORT = process.env.PORT || 3000;
-const webSocket = new WebSocket.Server({ port: PORT });
+const http = require("http");
+const Socket = require("websocket").server;
 const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.end('Hello World');
-});
+    res.statusCode = 200;
+    res.end('Hello World');
+  });
 
-server.listen(PORT, () => console.log("Server is running on port:", PORT));
+server.listen(3000, ()=>console.log("ddd"));
+
+const webSocket = new Socket({httpServer:server})
 
 const users = []
 
 webSocket.on('request',(req)=>{
     const connection = req.accept()
+   
 
     connection.on('message',(message)=>{
         const data = JSON.parse(message.utf8Data)
