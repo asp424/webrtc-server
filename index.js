@@ -1,11 +1,13 @@
-const http = require("http")
-const Socket = require("websocket").server
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.end('Hello World');
-  });
+const http = require("http");
+const Socket = require("websocket").server;
+const port = process.env.PORT || 3000;
 
-server.listen(process.env.PORT, ()=>console.log("ddd"));
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.end('Hello World');
+});
+
+server.listen(port, () => console.log("Server is running on port:", port));
 
 const webSocket = new Socket({httpServer:server})
 
@@ -13,7 +15,6 @@ const users = []
 
 webSocket.on('request',(req)=>{
     const connection = req.accept()
-   
 
     connection.on('message',(message)=>{
         const data = JSON.parse(message.utf8Data)
@@ -28,7 +29,6 @@ webSocket.on('request',(req)=>{
                         type:'user already exists'
                     }))
                     return
-
                 }
 
                 const newUser = {
