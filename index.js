@@ -1,15 +1,12 @@
-const http = require("http");
-const Socket = require("websocket").server;
-const port = process.env.PORT || 3000;
-
+const WebSocket = require('websocket');
+const PORT = process.env.PORT || 3000;
+const webSocket = new WebSocket.Server({ port: PORT });
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.end('Hello World');
 });
 
-server.listen(port, () => console.log("Server is running on port:", port));
-
-const webSocket = new Socket({httpServer:server})
+server.listen(PORT, () => console.log("Server is running on port:", PORT));
 
 const users = []
 
