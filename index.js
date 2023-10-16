@@ -1,10 +1,13 @@
 const http = require("http")
 const Socket = require("websocket").server
-const server = http.createServer(()=>{})
+const server = http.createServer((req, res) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello World');
+  });
 
-server.listen(3000,()=>{
-    console.log("ddd");
-})
+const PORT = process.env.PORT || 3000;
+server.listen(PORT,()=>console.log("ddd"));
 
 const webSocket = new Socket({httpServer:server})
 
