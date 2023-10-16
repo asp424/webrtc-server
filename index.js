@@ -5,8 +5,7 @@ const server = http.createServer((req, res) => {
     res.end('Hello World');
   });
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, '44.233.151.27', ()=>console.log("ddd"));
+server.listen(process.env.PORT, ()=>console.log("ddd"));
 
 const webSocket = new Socket({httpServer:server})
 
